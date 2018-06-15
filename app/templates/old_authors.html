@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+    {% if authors %}
+    <table>
+        <tr>
+            <th>First Name</th>
+            <th>Surname</th>
+        </tr>
+        
+        {% for author in authors %}
+            <tr>
+                <td>{{ author.name }}</td>
+                <td>{{ author.surname }}</td>
+            </tr>        
+        {% endfor %}        
+    </table>
+    <div>
+        <a href='/create_author'>Create Author</a>
+    <div>
+    {% endif %}
+{% endblock %}
