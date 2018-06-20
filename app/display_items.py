@@ -13,4 +13,10 @@ class BookTable(Table):
     description = Col('Description')
     year = Col('Year')
     author = Col('Author')
+    number_of_copies = Col('Copies')
     id = LinkCol('Edit', 'edit_book', url_kwargs=dict(id='id'))
+
+class CopiesTable(Table):
+
+    date_acquired = Col('Date Acquired')
+    library_serial_number = Col('Serial Number')

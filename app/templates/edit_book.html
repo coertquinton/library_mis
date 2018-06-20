@@ -19,6 +19,12 @@
             {{ form.author_id.label }}<br>
             {{ form.author_id }}
         </p>
-        <p>{{ form.submit(value="Edit Book") }}</p>
+        <p>
+            {{ form.submit(value="Edit Book") }}
+            <input type="submit" value="Create Copy" formaction="/create_copy/{{ book_id }}">
+        </p>
+        <p>
+            {{ copies_table }}
+        </p>
     </form>
 {% endblock %}

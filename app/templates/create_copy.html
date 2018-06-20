@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <form action="" method="post">
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.book_id }}
+        </p>
+        <p>
+            {{ form.book.label }}<br>
+            {{ form.book }}
+        </p>
+        <p>
+            {{ form.library_serial_number.label }}<br>
+            {{ form.library_serial_number(size=30) }}
+        </p>
+        <p>
+            {{ form.date_acquired.label }}<br>
+            {{ form.date_acquired(class_='datepicker') }}
+        </p>
+        <p>{{ form.submit() }}</p>
+    </form>
+{% endblock %}
