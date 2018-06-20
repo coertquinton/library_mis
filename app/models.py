@@ -19,7 +19,7 @@ class Book(db.Model):
     copies = db.relationship('Copy', backref='book', lazy='dynamic')
     
     def __repr__(self):
-        return '<Book {} by {}>'.format(self.title, self.author)
+        return 'Book: {} by {}'.format(self.title, self.author)
 
     def number_of_copies(self):
         return self.copies.count()
@@ -32,4 +32,4 @@ class Copy(db.Model):
     date_acquired = db.Column(db.DateTime, default=datetime.utcnow)
 
     def __repr__(self):
-        return '<Copy> {}'.format(self.library_serial_number)
+        return 'Copy: {}'.format(self.library_serial_number)
