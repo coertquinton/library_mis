@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <form action="" method="post">
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.name.label }}<br>
+            {{ form.name(size=32) }}
+        </p>
+        <p>
+            {{ form.surname.label }}<br>
+            {{ form.surname(size=32) }}
+        </p>
+        <p>
+            {{ form.initials.label }}<br>
+            {{ form.initials(size=32) }}
+        </p>
+        <p>
+            {{ form.id_number.label }}<br>
+            {{ form.id_number(size=32) }}
+        </p>
+        <p>
+            {{ form.address.label }}<br>
+            {{ form.address(size=32) }}
+        </p>
+        <p>
+            {{ form.suburb.label }}<br>
+            {{ form.suburb(size=32) }}
+        </p>
+        <p>
+            {{ form.city.label }}<br>
+            {{ form.city(size=32) }}
+        </p>
+        <p>
+            {{ form.postal_code.label }}<br>
+            {{ form.postal_code(size=32) }}
+        </p>
+        <p>
+            {{ form.email.label }}<br>
+            {{ form.email(size=32) }}
+        </p>
+        <p>
+            {{ form.phone.label }}<br>
+            {{ form.phone(size=32) }}
+        </p>
+        <p>
+            {{ form.alternative_phone.label }}<br>
+            {{ form.alternative_phone(size=32) }}
+        </p>
+        <p>
+            {{ form.next_of_kin.label }}<br>
+            {{ form.next_of_kin(size=32) }}
+        </p>
+        <p>
+            {{ form.next_of_kin_relation.label }}<br>
+            {{ form.next_of_kin_relation(size=32) }}
+        </p>
+        <p>
+            {{ form.next_of_kin_contact.label }}<br>
+            {{ form.next_of_kin_contact(size=32) }}
+        </p>
+{#        <p>#}
+{#            {{ form..label }}<br>#}
+{#            {{ form.(size=32) }}#}
+{#        </p>#}
+
+        <p>{{ form.submit() }}</p>
+    </form>
+{% endblock %}
