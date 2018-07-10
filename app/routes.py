@@ -1,8 +1,10 @@
 from flask import render_template, flash, redirect, url_for
 
-from app.models import Author, Book, Copy
-from app.forms import CreateAuthorForm, CreateBookForm, CreateCopy
-from app.display_items import AuthorTable, BookTable, CopiesTable
+from app.models import Author, Book, Copy, Patron
+from app.forms import CreateAuthorForm, CreateBookForm, CreateCopy, \
+    CreatePatronForm
+from app.display_items import AuthorTable, BookTable, CopiesTable, \
+    PatronsTable
 
 from app import app, db
 
@@ -142,8 +144,63 @@ def create_copy(id=None):
     return redirect('/books')
 
 
-    
-    
-    
+@app.route('/patrons')
+def patrons():
+    patrons = Patron.query.order_by('surname')
+
+    table = PatronsTable(patrons)
+    return render_template('patrons.html', title='Patrons', table=table)
 
 
+@app.route('/create_patron', methods=['GET', 'POST'])
+def create_patron(id=None):
+    form = CreatePatronForm()
+    if form.validate_on_submit():
+        patron = Patron(name=form.name.data, surname=form.surname.data,
+            initials=form.initials.data, id_number=form.id_number.data,
+            address=form.address.data, suburb=form.suburb.data, city=form.city.data,
+            postal_code=form.postal_code.data, email=form.email.data,
+            phone=form.phone.data, alternative_phone=form.alternative_phone.data,
+            next_of_kin=form.next_of_kin.data, next_of_kin_relation=form.next_of_kin_relation.data,
+            next_of_kin_contact=form.next_of_kin_contact.data)
+
+        db.session.add(patron)
+        db.session.commit()
+        flash('Created patron {} {}...'.format(form.name.data, form.surname.data))
+
+        return redirect('/patrons')
+
+    return render_template('create_patron.html', form=form)
+
+
+@app.route('/edit_patron/<id>', methods=['GET', 'POST'])
+def edit_patron(id=None):
+    form = CreatePatronForm()
+    if form.validate_on_submit():
+        if id:
+            patrons = Patron.query.filter_by(id=id)
+            if patrons:
+                patron = patrons[0]
+                patron.name = form.name.data
+                patron.surname = form.surname.data
+                patron.initials=form.initials.data
+                patron.id_number=form.id_number.data
+                patron.address=form.address.data
+                patron.suburb=form.suburb.data
+                patron.city=form.city.data,
+                patron.postal_code=form.postal_code.data
+                patron.email=form.email.data
+                patron.phone=form.phone.data
+                patron.alternative_phone=form.alternative_phone.data
+                patron.next_of_kin=form.next_of_kin.data
+                patron.next_of_kin_relation=form.next_of_kin_relation.data
+                patron.next_of_kin_contact=form.next_of_kin_contact.data
+                db.session.commit()
+        flash('Patron details updated')
+        return redirect('/patrons')
+
+    if id:
+        patrons = Patron.query.filter_by(id=id)
+        if patrons:
+            form = CreatePatronForm(obj=patrons[0])
+    return render_template('edit_patron.html', form=form)
