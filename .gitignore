@@ -1,3 +1,4 @@
 **.pyc
 venv/
 app/__pycache__/
+.idea/
